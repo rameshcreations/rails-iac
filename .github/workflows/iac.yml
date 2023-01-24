@@ -15,8 +15,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.3.7
+      - name: Check Versions
+        run: |
+          terraform --version
+          tflint --version
+          infracost --version
+          driftctl version
+          tfsec --version
       
