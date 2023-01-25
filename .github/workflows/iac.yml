@@ -10,7 +10,6 @@ jobs:
   iac_automation:
     name: "Rails IaC"
     runs-on: ubuntu-latest
-    container: ghcr.io/rameshcreations/iac-image:main
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -21,14 +20,6 @@ jobs:
           role-to-assume: arn:aws:iam::592309593815:role/rails-aws-master-github-oidc
           role-duration-seconds: 600
           aws-region: us-east-1
-
+          
       - name: Check AWS Creds
         run: aws sts get-caller-identity
-
-      - name: Check Tools Versions
-        run: |
-          terraform --version
-          tflint --version
-          infracost --version
-          driftctl version
-          tfsec --version
