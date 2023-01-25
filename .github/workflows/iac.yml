@@ -22,7 +22,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: arn:aws:iam::592309593815:role/rails-aws-master-github-oidc
-          role-duration-seconds: 600
+          role-session-name: rails-github-ci
           aws-region: us-east-1
           
       - name: Check AWS Creds
