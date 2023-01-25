@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
 
+permissions:
+      id-token: write
+      contents: read
+
 jobs:
   iac_automation:
     name: "Rails IaC"
