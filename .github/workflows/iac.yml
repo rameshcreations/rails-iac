@@ -36,3 +36,4 @@ jobs:
           infracost --version
           driftctl version
           tfsec --version
+          aws s3 ls
