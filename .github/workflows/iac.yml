@@ -12,8 +12,8 @@ permissions:
 
 env:
   TFLINT_CONFIG: config/tflint.hcl
-  REGION_VAR_FILE: "${GITHUB_ACTION_PATH}/envs/dev/us-east-1/terraform.tfvars"
-  GLOBAL_VAR_FILE: "${GITHUB_ACTION_PATH}/envs/dev/global/terraform.tfvars"
+  REGION_VAR_FILE: "envs/dev/us-east-1/terraform.tfvars"
+  GLOBAL_VAR_FILE: "envs/dev/global/terraform.tfvars"
 
 jobs:
   iac_automation:
