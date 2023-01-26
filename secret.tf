@@ -8,8 +8,9 @@ resource "aws_secretsmanager_secret_version" "redis" {
   secret_id = aws_secretsmanager_secret.redis.id
   secret_string = jsonencode(
     {
-      auth_token             = module.redis.password
-      port                   = 6379
+      endpoint   = "redis-master.redis.svc.cluster.local"
+      auth_token = module.redis.password
+      port       = 6379
     }
   )
 }

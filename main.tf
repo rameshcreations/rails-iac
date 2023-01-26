@@ -17,3 +17,11 @@ module "redis" {
     module.eks
   ]
 }
+
+#Elastic Operator
+module "eck-operator" {
+  source = "./modules/eck-operator"
+  depends_on = [
+    module.eks
+  ]
+}
