@@ -18,24 +18,15 @@ env:
   PLAN_BIN: plan.bin
   PLAN_JSON: plan.json
   INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }} 
+
 jobs:
-  iac_automation:
-    name: "Rails IaC"
+  iac_plan:
+    name: "IaC Plan"
     runs-on: ubuntu-latest
     container: ghcr.io/rameshcreations/iac-image:main
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::592309593815:role/rails-aws-master-github-oidc
-          role-session-name: rails-github-ci
-          aws-region: us-east-1
-          
-      - name: Check AWS Creds
-        run: aws sts get-caller-identity
 
       - name: Check Tools Versions
         run: |
@@ -88,4 +79,30 @@ jobs:
           path: |
             tflint.xml
             terraform-plan.json
-    
+
+  iac_apply:
+      name: "IaC Apply"
+      needs: iac_plan
+      runs-on: ubuntu-latest
+      container: ghcr.io/rameshcreations/iac-image:main
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            role-to-assume: arn:aws:iam::592309593815:role/rails-aws-master-github-oidc
+            role-session-name: rails-github-ci
+            aws-region: us-east-1
+            
+        - name: Check AWS Creds
+          run: aws sts get-caller-identity
+
+        - name: Terraform Apply
+          run: |   
+            echo "==========================="
+            echo "ℹ️  apply"
+            echo "==========================="
+             terraform init -backend-config=${BACKEND_CONFIG}
+             terraform apply -var-file=${REGION_VAR_FILE} -var-file=${GLOBAL_VAR_FILE} -auto-approve
