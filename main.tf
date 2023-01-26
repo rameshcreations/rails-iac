@@ -9,11 +9,11 @@ module "aws_load_balancer_controller" {
 }
 
 
-# #Redis
-# module "redis" {
-#   source = "./modules/redis"
-#   module_architecture = "replication"
-#   depends_on = [
-#     module.eks
-#   ]
-# }
+#Redis
+module "redis" {
+  source = "./modules/redis"
+  module_architecture = "replication"
+  depends_on = [
+    module.eks
+  ]
+}
