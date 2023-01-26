@@ -1,6 +1,6 @@
 resource "helm_release" "eck_operator" {
   repository       = "https://helm.elastic.co"
-  chart            = "elastic"
+  chart            = "eck-operator"
   version          = var.package_version
   name             = var.module_name
   namespace        = var.module_namespace
