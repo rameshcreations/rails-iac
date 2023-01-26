@@ -36,6 +36,7 @@ jobs:
 
       - name: Check Tools Versions
         run: |
+          aws --version
           terraform --version
           tflint --version
           infracost --version
