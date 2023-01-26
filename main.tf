@@ -46,3 +46,15 @@ module "kibana" {
     module.elastic_cluster
   ]
 }
+
+#Kibana-Ingress
+module "kibana_ingress" {
+  source              = "./modules/kubernetes-resource-from-yaml"
+  override_namespace  = local.elastic_namespace
+  resource_definition = local.kibana_ingress_yaml
+  depends_on = [
+    module.eck_operator,
+    module.elastic_cluster,
+    module.kibana,
+  ]
+}
