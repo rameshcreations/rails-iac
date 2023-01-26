@@ -16,7 +16,8 @@ locals {
   }
 
   kibana_ingress_deployment = {
-    acm_arn = module.acm.acm_certificate_arn
+    acm_arn   = module.acm.acm_certificate_arn
+    namespace = local.elastic_namespace
   }
 
   elastic_cluster_deployment_yaml = templatefile("./yaml-templates/cluster.yaml", local.elastic_cluster_deployment_vars)
