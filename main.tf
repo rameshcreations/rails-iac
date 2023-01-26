@@ -8,7 +8,6 @@ module "aws_load_balancer_controller" {
   ]
 }
 
-
 #Redis
 module "redis" {
   source              = "./modules/redis"
@@ -31,5 +30,5 @@ module "eck_operator" {
 module "elastic_cluster" {
   source              = "./modules/kubernetes-resource-from-yaml"
   override_namespace  = local.elastic_namespace
-  resource_definition = "./yaml-templates/cluster.yaml"
+  resource_definition = local.elastic_cluster_deployment_yaml
 }
