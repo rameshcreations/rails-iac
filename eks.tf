@@ -1,3 +1,8 @@
+resource "aws_iam_policy" "aws_load_balancer_controller" {
+  name   = format("%s-%s", local.name, "aws-lb")
+  policy = file("${path.module}/iam/policy.json")
+}
+
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "19.5.1"
@@ -10,7 +15,8 @@ module "eks" {
   manage_aws_auth_configmap      = true
   cluster_endpoint_public_access = true
   iam_role_additional_policies = {
-      additional = data.aws_iam_policy.eks_policy.arn
+    additional                   = data.aws_iam_policy.eks_policy.arn
+    aws-load-balancer-controller = aws_iam_policy.aws_load_balancer_controller.arn
   }
   cluster_addons = {
     coredns = {
@@ -29,7 +35,7 @@ module "eks" {
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
   }
-  
+
   eks_managed_node_groups = {
     app_node_group = {
       name = "app-node-group"
