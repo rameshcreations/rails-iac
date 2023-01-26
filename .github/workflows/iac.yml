@@ -36,4 +36,12 @@ jobs:
           infracost --version
           driftctl version
           tfsec --version
-          aws s3 ls
+
+      - name: Terraform Init+Fmt+Validate
+        run: |
+          echo "==========================="
+          echo "ℹ️  terraform init+fmt+validate"
+          echo "==========================="
+          terraform init -backend=false
+          terraform fmt -recursive -write=false
+          terraform validate
