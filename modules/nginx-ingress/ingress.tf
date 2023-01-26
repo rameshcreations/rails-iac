@@ -1,5 +1,5 @@
 resource "helm_release" "aws_ingress" {
-  name             = var.module_ingress_class
+  name             = "ingress-nginx"
   chart            = "ingress-nginx"
   repository       = "https://kubernetes.github.io/ingress-nginx"
   version          = var.module_chart_version
