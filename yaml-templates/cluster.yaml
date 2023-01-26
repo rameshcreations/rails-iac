@@ -8,7 +8,6 @@ spec:
   - name: master
     count: 1
     config:
-      node.master: true
       node.roles: master
       node.ingest: false
       xpack.ml.enabled: true
@@ -16,7 +15,6 @@ spec:
   - name: data
     count: 1
     config:
-      node.master: false
       node.roles: ["data", "ingest", "ml", "transform"]
       node.ingest: false
       xpack.ml.enabled: true
