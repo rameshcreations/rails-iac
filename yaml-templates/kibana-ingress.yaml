@@ -3,16 +3,8 @@ kind: Ingress
 metadata:
   namespace: ${namespace}
   name: kibana-ingress
-  annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/ip-address-type: ipv4
-    alb.ingress.kubernetes.io/ssl-redirect: '443'
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/certificate-arn: ${acm_arn}
-    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-1-2017-01
 spec:
-  ingressClassName: alb
+  ingressClassName: nginx
   rules:
     - host: "kibana.rameshcreations.com"
       http:

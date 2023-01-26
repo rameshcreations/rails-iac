@@ -457,7 +457,11 @@ controller:
     ##
     appProtocol: true
 
-    annotations: {}
+    annotations: 
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+      service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '60'
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
     labels: {}
     # clusterIP: ""
 
@@ -475,7 +479,7 @@ controller:
 
     ## Set external traffic policy to: "Local" to preserve source IP on providers supporting it.
     ## Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
-    # externalTrafficPolicy: ""
+    externalTrafficPolicy: Local
 
     ## Must be either "None" or "ClientIP" if set. Kubernetes will default to "None".
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
