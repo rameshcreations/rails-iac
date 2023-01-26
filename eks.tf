@@ -1,6 +1,6 @@
 resource "aws_iam_policy" "aws_load_balancer_controller" {
   name   = format("%s-%s", local.name, "aws-lb")
-  policy = file("${path.module}/iam/policy.json")
+  policy = file("${path.module}/iam/aws-lb.json")
 }
 
 module "eks" {
