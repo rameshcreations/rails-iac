@@ -14,6 +14,7 @@ env:
   TFLINT_CONFIG: config/tflint.hcl
   REGION_VAR_FILE: "envs/dev/us-east-1/terraform.tfvars"
   GLOBAL_VAR_FILE: "envs/dev/global/terraform.tfvars"
+  BACKEND_CONFIG: "envs/dev/us-east-1/backend.tfvars"
 
 jobs:
   iac_automation:
@@ -61,9 +62,23 @@ jobs:
           tflint --config=${TFLINT_CONFIG} --format=junit --force --var-file=${REGION_VAR_FILE} --var-file=${GLOBAL_VAR_FILE} . > tflint.xml
           tflint --config=${TFLINT_CONFIG} --force --var-file=${REGION_VAR_FILE} --var-file=${GLOBAL_VAR_FILE} .
 
+      - name: Terraform Plan
+        run: |   
+          echo "==========================="
+          echo "ℹ️  plan"
+          echo "==========================="
+          alias convert_report="jq -r '([.resource_changes[]?.change.actions?]|flatten)|{\"create\":(map(select(.==\"create\"))|length),\"update\":(map(select(.==\"update\"))|length),\"delete\":(map(select(.==\"delete\"))|length)}'"
+          shopt -s expand_aliases
+          terraform init -backend-config=${BACKEND_CONFIG}
+          terraform plan -var-file=${REGION_VAR_FILE} -var-file=${GLOBAL_VAR_FILE} -out=$PLAN_BIN
+          terraform show -json $PLAN_BIN > $PLAN_JSON
+          terraform show -json $PLAN_BIN | convert_report > terraform-plan.json
+
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: tflint Report
-          path: tflint.xml
+          name: Report
+          path: |
+            tflint.xml
+            terraform-plan.json
     
