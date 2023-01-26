@@ -18,6 +18,16 @@ module "vpc" {
   one_nat_gateway_per_az          = false
   enable_vpn_gateway              = false
 
+  public_subnet_tags = {
+    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+    "kubernetes.io/role/elb"                      = 1
+  }
+
+  private_subnet_tags = {
+    "kubernetes.io/cluster/${local.cluster_name}" = "shared"
+    "kubernetes.io/role/internal-elb"             = 1
+  }
+
   # VPC Flow Logs
   enable_flow_log                                 = true
   create_flow_log_cloudwatch_log_group            = true
