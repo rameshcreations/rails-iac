@@ -28,7 +28,7 @@ module "vpc" {
   vpc_flow_log_tags                               = { Name = "${local.name}-flow-logs" }
 
   public_dedicated_network_acl  = true
-  private_dedicated_network_acl = truetrue
+  private_dedicated_network_acl = true
   default_network_acl_ingress   = []
   default_network_acl_egress    = []
 

@@ -10,6 +10,11 @@ permissions:
       id-token: write
       contents: read
 
+env:
+  TFLINT_CONFIG: config/tflint.hcl
+  REGION_VAR_FILE: "$GITHUB_ACTION_PATH/envs/dev/us-east-1/terraform.tfvars"
+  GLOBAL_VAR_FILE: "$GITHUB_ACTION_PATH/envs/dev/global/terraform.tfvars"
+
 jobs:
   iac_automation:
     name: "Rails IaC"
@@ -45,3 +50,13 @@ jobs:
           terraform init -backend=false
           terraform fmt -recursive -write=false
           terraform validate
+
+      - name: Terraform tflint
+        run: |
+          echo "==========================="
+          echo "ℹ️  terraform tflint"
+          echo "==========================="
+          tflint --init --config=${TFLINT_CONFIG} --var-file=${REGION_VAR_FILE} --var-file=${GLOBAL_VAR_FILE} .
+          tflint --config=${TFLINT_CONFIG} --format=junit --force --var-file=${REGION_VAR_FILE} --var-file=${GLOBAL_VAR_FILE} . > tflint.xml
+          tflint --config=${TFLINT_CONFIG} --force --var-file=${REGION_VAR_FILE} --var-file=${GLOBAL_VAR_FILE} .
+    
