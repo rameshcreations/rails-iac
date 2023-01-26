@@ -16,7 +16,6 @@ variable "package_version" {
 variable "module_namespace" {
   description = "Namespace for the module"
   type        = string
-  default     = "elastic"
 }
 
 # Create namespace if not exists

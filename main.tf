@@ -19,9 +19,20 @@ module "redis" {
 }
 
 #Elastic Operator
-module "eck-operator" {
+module "eck_operator" {
   source = "./modules/eck-operator"
+   module_namespace = local.elastic_namespace
   depends_on = [
     module.eks
+  ]
+}
+
+# Elastic Cluster
+module "elastic_cluster" {
+  source = "./modules/eck-cluster"
+  module_namespace = local.elastic_namespace
+  depends_on = [
+    module.eks,
+    module.eck_operator
   ]
 }
