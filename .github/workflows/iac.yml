@@ -15,7 +15,7 @@ env:
   REGION_VAR_FILE: "envs/dev/us-east-1/terraform.tfvars"
   GLOBAL_VAR_FILE: "envs/dev/global/terraform.tfvars"
   BACKEND_CONFIG: "envs/dev/us-east-1/backend.tfvars"
-
+  PLAN_BIN: plan.bin
 jobs:
   iac_automation:
     name: "Rails IaC"
