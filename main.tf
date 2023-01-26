@@ -1,13 +1,4 @@
-# #AWS Loadbalancer Controller
-# module "aws_load_balancer_controller" {
-#   source           = "./modules/ingress"
-#   aws_region       = local.region
-#   eks_cluster_name = module.eks.cluster_name
-#   depends_on = [
-#     module.eks
-#   ]
-# }
-
+#Nginx Ingress
 module "nginx-ingress" {
   source           = "./modules/nginx-ingress"
   depends_on = [
@@ -54,14 +45,14 @@ module "kibana" {
   ]
 }
 
-# #Kibana-Ingress
-# module "kibana_ingress" {
-#   source              = "./modules/kubernetes-resource-from-yaml"
-#   override_namespace  = local.elastic_namespace
-#   resource_definition = local.kibana_ingress_yaml
-#   depends_on = [
-#     module.eck_operator,
-#     module.elastic_cluster,
-#     module.kibana,
-#   ]
-# }
+#Kibana-Ingress
+module "kibana_ingress" {
+  source              = "./modules/kubernetes-resource-from-yaml"
+  override_namespace  = local.elastic_namespace
+  resource_definition = local.kibana_ingress_yaml
+  depends_on = [
+    module.eck_operator,
+    module.elastic_cluster,
+    module.kibana,
+  ]
+}

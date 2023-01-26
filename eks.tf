@@ -74,5 +74,8 @@ module "eks" {
   aws_auth_accounts = [
     local.account_id,
   ]
-
 }
+
+
+
+
