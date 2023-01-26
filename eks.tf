@@ -9,6 +9,7 @@ module "eks" {
   subnet_ids                     = module.vpc.public_subnets
   manage_aws_auth_configmap      = true
   cluster_endpoint_public_access = true
+  iam_role_additional_policies = data.aws_iam_policy.eks_policy.policy
   cluster_addons = {
     coredns = {
       most_recent = true
