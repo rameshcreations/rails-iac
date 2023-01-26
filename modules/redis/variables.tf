@@ -9,7 +9,7 @@ variable "module_name" {
 variable "package_version" {
   description = "Helm package version"
   type        = string
-  default     = "15.7.5"
+  default     = "17.6.0"
 }
 
 # Module namespace
