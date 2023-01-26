@@ -59,4 +59,10 @@ jobs:
           tflint --init --config=${TFLINT_CONFIG} --var-file=${REGION_VAR_FILE} --var-file=${GLOBAL_VAR_FILE} .
           tflint --config=${TFLINT_CONFIG} --format=junit --force --var-file=${REGION_VAR_FILE} --var-file=${GLOBAL_VAR_FILE} . > tflint.xml
           tflint --config=${TFLINT_CONFIG} --force --var-file=${REGION_VAR_FILE} --var-file=${GLOBAL_VAR_FILE} .
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: tflint
+          path: tflint.xml
     
