@@ -18,11 +18,6 @@ variable "environment" {
   type        = string
 }
 
-variable "profile" {
-  description = "AWS Profile"
-  type        = string
-}
-
 variable "vpc_cidr" {
   type        = string
   description = "The CIDR block for the VPC."
