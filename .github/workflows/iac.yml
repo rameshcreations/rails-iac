@@ -68,7 +68,6 @@ jobs:
           echo "ℹ️  plan"
           echo "==========================="
           alias convert_report="jq -r '([.resource_changes[]?.change.actions?]|flatten)|{\"create\":(map(select(.==\"create\"))|length),\"update\":(map(select(.==\"update\"))|length),\"delete\":(map(select(.==\"delete\"))|length)}'"
-          shopt -s expand_aliases
           terraform init -backend-config=${BACKEND_CONFIG}
           terraform plan -var-file=${REGION_VAR_FILE} -var-file=${GLOBAL_VAR_FILE} -out=$PLAN_BIN
           terraform show -json $PLAN_BIN > $PLAN_JSON
