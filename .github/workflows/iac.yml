@@ -80,7 +80,7 @@ jobs:
           echo "==========================="
           infracost configure set enable_dashboard true
           infracost breakdown --path $PLAN_JSON --terraform-plan-flags "-var-file=$REGION_VAR_FILE "-var-file=$GLOBAL_VAR_FILE"" --format json --out-file infracost.json
-          infracost output --format html --path infracost-$ENVIRONMENT-$STACK.json --out-file infracost.html
+          infracost output --format html --path infracost.json --out-file infracost.html
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
