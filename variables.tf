@@ -37,3 +37,8 @@ variable "vpc_public_subnets" {
   type        = list(string)
   description = "A list of public subnets"
 }
+
+variable "domain_name" {
+  description = "Domain Name"
+  type        = string
+}
