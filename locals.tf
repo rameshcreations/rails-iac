@@ -6,10 +6,17 @@ locals {
   elastic_namespace = "elastic"
 
   elastic_cluster_deployment_vars = {
-    name      = "elastic-cluster"
+    name = "elastic-cluster"
+  }
+
+  kibana_deployment_vars = {
+    name         = "kibana"
+    cluster_name = "elastic-cluster"
+    namespace    = local.elastic_namespace
   }
 
   elastic_cluster_deployment_yaml = templatefile("./yaml-templates/cluster.yaml", local.elastic_cluster_deployment_vars)
+  kibana_deployment_yaml          = templatefile("./yaml-templates/kibana.yaml", local.kibana_deployment_vars)
 }
 
 

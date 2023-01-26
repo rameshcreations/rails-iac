@@ -9,7 +9,6 @@ spec:
     count: 1
     config:
       node.roles: master
-
       xpack.ml.enabled: true
       node.store.allow_mmap: false
   - name: data

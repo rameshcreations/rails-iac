@@ -35,3 +35,14 @@ module "elastic_cluster" {
     module.eck_operator
   ]
 }
+
+#Kibana
+module "kibana" {
+  source              = "./modules/kubernetes-resource-from-yaml"
+  override_namespace  = local.elastic_namespace
+  resource_definition = local.kibana_deployment_yaml
+  depends_on = [
+    module.eck_operator,
+    module.elastic_cluster
+  ]
+}
