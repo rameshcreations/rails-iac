@@ -9,7 +9,7 @@ spec:
     count: 1
     config:
       node.master: true
-      node.data: false
+      node.roles: master
       node.ingest: false
       xpack.ml.enabled: true
       node.store.allow_mmap: false
@@ -17,15 +17,7 @@ spec:
     count: 1
     config:
       node.master: false
-      node.data: true
+      node.roles: ["data", "ingest", "ml", "transform"]
       node.ingest: false
-      xpack.ml.enabled: true
-      node.store.allow_mmap: false
-  - name: client
-    count: 1
-    config:
-      node.master: false
-      node.data: false
-      node.ingest: true
       xpack.ml.enabled: true
       node.store.allow_mmap: false
