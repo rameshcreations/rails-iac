@@ -43,7 +43,7 @@ module "eks" {
       instance_types = ["t3.medium"]
       min_size       = 2
       max_size       = 4
-      desired_size   = 3
+      desired_size   = 4
 
       update_config = {
         max_unavailable_percentage = 50
