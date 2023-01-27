@@ -14,15 +14,10 @@ locals {
     cluster_name = "elastic-cluster"
     namespace    = local.elastic_namespace
   }
-
-  kibana_ingress_deployment = {
-    acm_arn   = module.acm.acm_certificate_arn
-    namespace = local.elastic_namespace
-  }
-
+  
   elastic_cluster_deployment_yaml = templatefile("./yaml-templates/cluster.yaml", local.elastic_cluster_deployment_vars)
   kibana_deployment_yaml          = templatefile("./yaml-templates/kibana.yaml", local.kibana_deployment_vars)
-  kibana_ingress_yaml             = templatefile("./yaml-templates/kibana-ingress.yaml", local.kibana_ingress_deployment)
+  
 }
 
 
