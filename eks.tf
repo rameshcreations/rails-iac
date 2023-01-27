@@ -76,6 +76,17 @@ module "eks" {
   ]
 }
 
+resource "kubernetes_namespace" "app" {
+  metadata {
+    labels = {
+      mylabel = local.name
+    }
+    name = local.name
+  }
+  depends_on = [
+    module.eks
+  ]
+}
 
 
 
