@@ -2,7 +2,7 @@
 variable "module_namespace" {
   description = "Ingress namespace"
   type        = string
-  default     = "nginx-ingress"
+  default     = "ingress"
 }
 
 # Create namespace if not exists

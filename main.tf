@@ -1,10 +1,10 @@
-# #Nginx Ingress
-# module "nginx-ingress" {
-#   source           = "./modules/nginx-ingress"
-#   depends_on = [
-#     module.eks
-#   ]
-# }
+#Nginx Ingress
+module "nginx-ingress" {
+  source           = "./modules/nginx-ingress"
+  depends_on = [
+    module.eks
+  ]
+}
 
 #Redis
 module "redis" {
